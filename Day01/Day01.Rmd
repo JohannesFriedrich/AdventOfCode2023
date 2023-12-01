@@ -1,0 +1,47 @@
+---
+title: "Day01"
+author: "Johannes Friedrich"
+date: "01.12.2023"
+output: github_document
+knit: (function(input, ...) {
+    rmarkdown::render(
+      input,
+      output_file = c("Readme.md"),
+      envir = globalenv()
+    )
+  })
+---
+
+## Read input
+
+```{r}
+input <- readLines("input.txt")
+```
+
+
+## Part 1
+
+```{r read_file, warning=FALSE}
+get_nums <- function(list){ regmatches(list, gregexpr("[0-9]",list)) }
+
+input |> 
+  get_nums() |> 
+  sapply(\(x) as.integer(paste0(x[1],  x[length(x)]))) |> 
+  sum()
+```
+
+## Part 2
+
+```{r part_1}
+sub <- setNames(c("one","two","three","four","five","six","seven","eight","nine"),
+                c("o1e", "t2o", "t3e", "f4r", "f5e", "s6x", "s7n", "e8t", "n9e"))
+
+for(i in 1:9){
+    input <- gsub(sub[i], names(sub[i]), input)
+}
+
+input |> 
+  get_nums() |> 
+  sapply(\(x) as.integer(paste0(x[1],  x[length(x)]))) |> 
+  sum()
+```

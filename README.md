@@ -1,9 +1,9 @@
-# My **R**-solutions for the [AdventOfCode](https://adventofcode.com/) challenge 20223
+# My **R**-solutions for the [AdventOfCode](https://adventofcode.com/) challenge 2023
 
 | Day | Part 1 | Part 2 |
 |:---:|:------:|:------:|
 |  1  |  ⭐  |  ⭐  |
-|  2  |      |      |
+|  2  |  ⭐  |  ⭐  |
 |  3  |      |      |
 |  4  |      |      |
 |  5  |      |      |

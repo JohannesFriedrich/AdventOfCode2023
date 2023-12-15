@@ -1,0 +1,65 @@
+---
+title: "Day08"
+author: "Johannes Friedrich"
+date: "08.12.2023"
+output: github_document
+knit: (function(input, ...) {
+    rmarkdown::render(
+      input,
+      output_file = c("Readme.md"),
+      envir = globalenv()
+    )
+  })
+---
+
+## Read input
+
+```{r}
+input <- readLines("input.txt")
+```
+
+## Part 1
+
+```{r part_1}
+instructions <- input[[1]] |> 
+  strsplit("") |> 
+  unlist()
+
+network <- regmatches(input[-(1:2)], gregexpr("\\w+", input[-(1:2)])) |> 
+  unlist() |> 
+  matrix(ncol=3, byrow = TRUE) |> data.frame()
+
+colnames(network) <- c("Node", "L", "R")
+
+next_node <- "AAA"
+counter <- 1
+while(next_node != "ZZZ"){
+  next_instruction <- ((counter-1)%%(length(instructions)))+1
+  counter <- counter + 1
+  next_node <- network[which(network$Node %in% next_node), instructions[next_instruction]]
+}
+counter - 1
+```
+
+## Part 2
+
+```{r part_2}
+
+next_nodes <- network$Node[endsWith(network$Node, "A")]
+network$Node[endsWith(network$R, "Z")]
+
+find_Z <- function(next_node){
+  counter <- 1
+  while(!all(endsWith(next_node, "Z"))){
+    next_instruction <- ((counter-1)%%(length(instructions)))+1
+    counter <- counter + 1
+    next_node <- network[which(network$Node %in% next_node), instructions[next_instruction]]
+  }
+  counter - 1
+}
+
+sapply(next_nodes, find_Z)
+
+
+```
+
